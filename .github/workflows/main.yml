@@ -2,7 +2,8 @@ name: Deploy boldi
 
 on:
   push:
-  -main
+  branches:
+    -main
 
 jobs:
   deploy:

@@ -1,0 +1,42 @@
+name: Deploy boldi
+
+on:
+  push:
+  -main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: checkout code
+      uses: actions/checkout@v3
+
+      -name: Deploy over SSH
+      uses: appleboy/ssh-actions@v1.0.3
+      with:
+      host: ${{secrets.DB_HOST}}
+      username: ${{secrets.DB_USER}}
+      key: ${{secrets.SSH_KEY}}
+      script: [
+        echo "creating project folder if it doesn't exist"
+        mkdir -p /home/ubuntu/prisma_and_auth
+
+        if [! -d .git]; then
+            echo "cloping repository",
+            git clone https://github.com/Asqaraliyev-Faxriddin/CD-CI-github.git
+        else
+              echo "puling latest" 
+              git pull -u origin main
+        fi
+
+        echo "stoping containers"
+          docker compose down
+
+        echo "building"
+        docker compose build
+
+        echo "creating image"
+        docker compose up -d
+
+      ]

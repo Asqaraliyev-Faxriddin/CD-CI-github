@@ -29,8 +29,10 @@ services:
     restart: always
     ports:
       - "4646:3000"
-    env_file:
-      - .env
+    
+    environment:
+      DATABASE_URL: "postgresql://postgres:11201111@db:5432/database"
+      REDIS_HOST: "redis"
     depends_on:
       - db 
       - redis

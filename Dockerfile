@@ -6,9 +6,11 @@ COPY package*.json ./
 
 RUN npm install
 
+COPY prisma ./prisma
+
 COPY . .
 
-RUN 
+
 RUN npm run build 
 
 EXPOSE 3000

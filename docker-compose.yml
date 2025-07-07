@@ -31,7 +31,7 @@ services:
       - "4646:3000"
     
     environment:
-      DATABASE_URL: "postgresql://postgres:11201111@db:5432/database"
+      DATABASE_URL: "postgresql://postgres:11201111@db:5432/dars2"
       REDIS_HOST: "redis"
     depends_on:
       - db 

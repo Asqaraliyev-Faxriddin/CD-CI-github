@@ -19,17 +19,18 @@ jobs:
           host: ${{ secrets.DB_HOST }}
           username: ${{ secrets.DB_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: |
+          script: | 
+
             echo "Creating project folder if it doesn't exist"
-            mkdir -p /home/ubuntu/prisma_and_auth
-            cd /home/ubuntu/prisma_and_auth
+              mkdir -p /home/ubuntu/prisma_and_auth
+              cd /home/ubuntu/prisma_and_auth
 
             if [ ! -d .git ]; then
-              echo "Cloning repository"
-              git clone https://github.com/Asqaraliyev-Faxriddin/CD-CI-github.git .
+                echo "Cloning repository"
+                git clone https://github.com/Asqaraliyev-Faxriddin/CD-CI-github.git .
             else
-              echo "Pulling latest"
-              git pull origin main
+                echo "Pulling latest"
+                git pull origin main
             fi
 
             echo "Stopping containers"
